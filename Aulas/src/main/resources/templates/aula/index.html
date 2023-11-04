@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Aulas</title>
+</head>
+<body>
+<nav>
+    <div class="nav-wrapper">
+        <a href="#" class="brand-logo">Aulas</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li class="active"><a href="/aula">AulasPendentes</a></li>
+            <li><a href="#">AulasConcluidas</a></li>
+            <li><a href="#">usuarios</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="container">
+
+    <div class="card-panel teal accent-3" th:if="${success}" th:text="${success}"></div>
+    <div class="card-panel read accent-3" th:if="${error}" th:text="${error}"></div>
+
+    <h2> Aulas Pendentes</h2>
+    <div class="row">
+        <div th:each="aula : ${aulas}" class="col s12 m6 l4">
+            <div class="card">
+                <div class="card-content">
+                    <div class="progress">
+                        <div class="determinate" th:style=" ${'width:' + aula.status + '%'}"></div>
+                    </div>
+                    <span th:text="${aula.title}" class="card-title">Aulas</span>
+                    <p th:text="${aula.description}">Descrição</p>
+                    <span th:text="${aula.score}" data-badge-caption="points" class="badge red white-text">4</span>
+
+                </div>
+                <div class="card-action">
+                    <a th:href="${'/aula/delete/'+ aula.id}"  class="waves-effect waves-light btn">
+                        <i class="material-icons left">delete</i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
